@@ -7,8 +7,10 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <button id="createGrid">Create grid</button>
-        <div class="container" id="gridContainer"></div>
+        <input id="gridRange" type="range" min="2" max="64" value="2" onchange="change();">
+        
+        <span id="gridSize"></span>
+        <div class="container" id="gridContainer"></div> 
     </body>
     <script src="main.js"></script>
 </html>
