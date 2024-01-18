@@ -11,3 +11,7 @@
     border: 0.1vh solid #000;
     background-color: #fff;
 }
+
+.grid-square:hover {
+    background-color: #000; /* Change the color on hover */
+}
