@@ -1,13 +1,13 @@
-.container{
+
+
+.gridContainer{
     display: flex;
     flex-wrap: wrap;
-    width: 50vh;
+    text-align: center;
 }
 
 .grid-square{
     box-sizing: border-box;
-    width: calc(100%/16);
-    padding-bottom: calc(100%/16);
     border: 0.1vh solid #000;
     background-color: #fff;
 }

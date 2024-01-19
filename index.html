@@ -3,14 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Etch-a-Sketch</title>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <input id="gridRange" type="range" min="2" max="64" value="2" onchange="change();">
-        
-        <span id="gridSize"></span>
-        <div class="container" id="gridContainer"></div> 
+        <div class="container">
+            <h1>Quadro</h1>
+            <input id="gridRange" type="range" min="2" max="64" value="16" onchange="change();">
+            
+            <span id="gridSize">16 x 16</span>
+            <div class="gridContainer" id="gridContainer"></div> 
+        </div>
     </body>
     <script src="main.js"></script>
 </html>
