@@ -33,5 +33,18 @@ function createGrid(){
     container.style.maxHeight = `${containerWidth}px`;
 }
 
+function clearGrid() {
+    let gridSquares = document.querySelectorAll(".grid-square");
+
+    gridSquares.forEach(gridSquare => {
+        gridSquare.style.backgroundColor = 'white';
+    });
+}
+
+
+
+
 gridRange.addEventListener("input", change);
 createGrid();
+
+
