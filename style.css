@@ -1,3 +1,7 @@
+body {
+    user-select: none;
+}
+
 .gridContainer{
     display: flex;
     flex-wrap: wrap;
@@ -6,8 +10,6 @@
 
 .grid-square{
     box-sizing: border-box;
-   border: 0.1px solid #484848;
-    background-color: #fff;
     transition: background-color 0.3s ease;
 }
 

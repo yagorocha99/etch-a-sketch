@@ -1,7 +1,8 @@
-let container = document.querySelector("#gridContainer");
+let container = document.querySelector(".gridContainer");
 let gridSize = document.querySelector("#gridSize");
 let gridRange = document.querySelector("#gridRange");
 let eraserMode = false;
+let gridMode = true;
 
 function change() {
     let value = gridRange.value;
@@ -20,6 +21,11 @@ function createGrid() {
     for (let i = 0; i < size * size; i++) {
         let gridSquare = document.createElement("div");
         gridSquare.classList.add("grid-square");
+
+        if (gridMode) {
+            gridSquare.style.border = "0.1vh solid #000";
+        }
+
         container.appendChild(gridSquare);
 
         let squareSize = containerWidth / size;
@@ -36,13 +42,30 @@ function createGrid() {
             }
         });
 
-        gridSquare.addEventListener('click', function() {
+        gridSquare.addEventListener('mousedown', function() {
+            isMousePressed = true;
             if (eraserMode) {
                 gridSquare.style.backgroundColor = 'white';
             } else {
                 gridSquare.style.backgroundColor = inputColor.value;
             }
         });
+
+        gridSquare.addEventListener('mouseover', function() {
+            if (isMousePressed) {
+                if (eraserMode) {
+                    gridSquare.style.backgroundColor = 'white';
+                } else {
+                    gridSquare.style.backgroundColor = inputColor.value;
+                }
+            }
+        });
+
+        gridSquare.addEventListener('mouseup', function() {
+            isMousePressed = false;
+        });
+
+
     }
 
     container.style.maxWidth = `${containerWidth}px`;
@@ -60,6 +83,24 @@ function clearGrid() {
 function toggleEraser() {
     eraserMode = !eraserMode;
 }
+
+function toggleGrid() {
+    gridMode = !gridMode;
+    updateGridStyles();
+}
+
+function updateGridStyles() {
+    let gridSquares = document.querySelectorAll(".grid-square");
+
+    gridSquares.forEach(gridSquare => {
+        if (gridMode) {
+            gridSquare.style.border = "0.1vh solid #000";
+        } else {
+            gridSquare.style.border = "none";
+        }
+    });
+}
+
 function changeColor() {
     let selectedColor = inputColor.value;
 
@@ -76,6 +117,23 @@ function changeColor() {
         }
     });
 }
+
+document.body.addEventListener('mousedown', function() {
+    isMousePressed = true;
+});
+
+document.body.addEventListener('mouseup', function() {
+    isMousePressed = false;
+});
+
+container.addEventListener('mousedown', function() {
+    isMousePressed = true;
+});
+
+container.addEventListener('mouseup', function() {
+    isMousePressed = false;
+});
+
 
 gridRange.addEventListener("input", change);
 createGrid();
