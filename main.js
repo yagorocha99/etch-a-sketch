@@ -1,6 +1,7 @@
 let container = document.querySelector("#gridContainer");
 let gridSize = document.querySelector("#gridSize");
 let gridRange = document.querySelector("#gridRange");
+let eraserMode = false;
 
 function change() {
     let value = gridRange.value;
@@ -27,12 +28,20 @@ function createGrid() {
         
         gridSquare.addEventListener('mouseover', function() {
             if (buttons === 1) {
-                gridSquare.style.backgroundColor = inputColor.value;
+                if (eraserMode) {
+                    gridSquare.style.backgroundColor = 'white';
+                } else {
+                    gridSquare.style.backgroundColor = inputColor.value;
+                }
             }
         });
 
         gridSquare.addEventListener('click', function() {
-            gridSquare.style.backgroundColor = inputColor.value;
+            if (eraserMode) {
+                gridSquare.style.backgroundColor = 'white';
+            } else {
+                gridSquare.style.backgroundColor = inputColor.value;
+            }
         });
     }
 
@@ -48,6 +57,9 @@ function clearGrid() {
     });
 }
 
+function toggleEraser() {
+    eraserMode = !eraserMode;
+}
 function changeColor() {
     let selectedColor = inputColor.value;
 
@@ -55,7 +67,11 @@ function changeColor() {
         if (event.buttons === 1) {
             let gridSquare = event.target;
             if (gridSquare.classList.contains("grid-square")) {
-                gridSquare.style.backgroundColor = selectedColor;
+                if (eraserMode) {
+                    gridSquare.style.backgroundColor = 'white';
+                } else {
+                    gridSquare.style.backgroundColor = selectedColor;
+                }
             }
         }
     });

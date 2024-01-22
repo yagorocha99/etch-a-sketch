@@ -6,11 +6,9 @@
 
 .grid-square{
     box-sizing: border-box;
-    border: 0.1vh solid #000;
+   border: 0.1px solid #484848;
     background-color: #fff;
     transition: background-color 0.3s ease;
 }
 
-.grid-square:hover {
-    background-color: #000;
-}
+
