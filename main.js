@@ -13,7 +13,7 @@ function change() {
 
 function createGrid() {
     let size = parseInt(gridRange.value);
-    let containerWidth = Math.min(window.innerWidth, window.innerHeight) * 0.8;
+    let containerWidth = Math.min(window.innerWidth, window.innerHeight) * 0.7;
     let inputColor = document.querySelector("#inputColor");
 
     container.innerHTML = '';
@@ -23,7 +23,7 @@ function createGrid() {
         gridSquare.classList.add("grid-square");
 
         if (gridMode) {
-            gridSquare.style.border = "0.1vh solid #000";
+            gridSquare.style.border = "0.1vh solid #9c9c9c";
         }
 
         container.appendChild(gridSquare);
@@ -94,7 +94,7 @@ function updateGridStyles() {
 
     gridSquares.forEach(gridSquare => {
         if (gridMode) {
-            gridSquare.style.border = "0.1vh solid #000";
+            gridSquare.style.border = "0.1vh solid #9c9c9c";
         } else {
             gridSquare.style.border = "none";
         }

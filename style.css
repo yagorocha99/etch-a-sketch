@@ -1,22 +1,44 @@
 body {
     user-select: none;
+    background-color: #5B6375;
+}
+
+h1{
+    text-align: center;
+    color: whitesmoke;
 }
 
 .container{
+    display: grid;
     text-align: center;
+    place-items: center;
+    padding-top: 10px;
+    padding-bottom: 40px;
+    margin-right: 300px;
+    margin-left: 300px;
+}
+
+.buttons-container{
+    margin: 1vh;
+    align-items: center;
+}
+
+.buttons-container > input {
+    
+}
+
+.buttons-container > button {
+
 }
 
 #gridContainer{
     display: flex;
-    flex-wrap: wrap;    
-}
-
-.gridRow{
-    display: flex;
+    flex-wrap: wrap;
 }
 
 .grid-square{
     box-sizing: border-box;
+    background-color: white;
     transition: background-color 0.3s ease;
 }
 

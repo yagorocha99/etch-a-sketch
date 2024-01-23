@@ -6,25 +6,30 @@
         <title>Etch-a-Sketch</title>
         <link rel="stylesheet" href="style.css">
     </head>
-    <body>
-        <div class="container">
 
-            <h1>Quadro</h1>
+    <body>
+        <h1>Etch-a-Sketch</h1>
+
+        <div class="container">
 
             <input id="gridRange" type="range" min="2" max="64" value="16" onchange="change();">
             <span id="gridSize">16 x 16</span>
+            
+            <div class="buttons-container">
+                <button onclick="clearGrid()">Clear</button>
 
-            <button onclick="clearGrid()">Clear</button>
+                <input type="color" id="inputColor">
 
-            <input type="color" id="inputColor">
+                <button onclick="toggleEraser()">Eraser</button>
 
-            <button onclick="toggleEraser()">Eraser</button>
-
-            <button onclick="toggleGrid()">Toggle Grid</button>
+                <button onclick="toggleGrid()">Toggle Grid</button>
+            </div>
 
             <div id="gridContainer"></div> 
         
         </div>
     </body>
+
     <script src="main.js"></script>
+    
 </html>
