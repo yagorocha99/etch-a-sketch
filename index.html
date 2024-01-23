@@ -13,16 +13,16 @@
         <div class="container">
 
             <input id="gridRange" type="range" min="2" max="64" value="16" onchange="change();">
-            <span id="gridSize">16 x 16</span>
+            <span id="gridSize" style="color: white;">16 x 16</span>
             
             <div class="buttons-container">
-                <button onclick="clearGrid()">Clear</button>
+                <button class="button" onclick="clearGrid()">Clear</button>
 
-                <input type="color" id="inputColor">
+                <button class="button" onclick="toggleEraser()">Eraser</button>
 
-                <button onclick="toggleEraser()">Eraser</button>
-
-                <button onclick="toggleGrid()">Toggle Grid</button>
+                <button class="button" onclick="toggleGrid()">Toggle Grid</button>
+                
+                <input class="button" type="color" id="inputColor">
             </div>
 
             <div id="gridContainer"></div> 

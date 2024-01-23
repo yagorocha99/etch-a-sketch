@@ -1,11 +1,13 @@
 body {
     user-select: none;
     background-color: #5B6375;
+    font-family: Neucha, sans-serif;
 }
 
 h1{
     text-align: center;
     color: whitesmoke;
+    text-shadow: 2px 2px #000;
 }
 
 .container{
@@ -14,26 +16,57 @@ h1{
     place-items: center;
     padding-top: 10px;
     padding-bottom: 40px;
-    margin-right: 300px;
-    margin-left: 300px;
 }
 
 .buttons-container{
     margin: 1vh;
     align-items: center;
+    justify-content: space-between;
 }
 
-.buttons-container > input {
-    
+.button {
+    align-self: center;
+    background-color: #fff;
+    background-image: none;
+    background-position: 0 90%;
+    background-repeat: repeat no-repeat;
+    background-size: 4px 3px;
+    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+    border-style: solid;
+    border-width: 2px;
+    box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+    box-sizing: border-box;
+    color: #41403e;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Neucha, sans-serif;
+    font-size: 1rem;
+    line-height: 23px;
+    outline: none;
+    text-decoration: none;
+    transition: all 235ms ease-in-out;
+    border-bottom-left-radius: 15px 255px;
+    border-bottom-right-radius: 225px 15px;
+    border-top-left-radius: 255px 15px;
+    border-top-right-radius: 15px 225px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
 }
-
-.buttons-container > button {
-
+  
+.button:hover {
+    box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+    transform: translate3d(0, 2px, 0);
+}
+  
+.button:focus {
+    box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
 }
 
 #gridContainer{
     display: flex;
     flex-wrap: wrap;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .grid-square{
@@ -41,5 +74,3 @@ h1{
     background-color: white;
     transition: background-color 0.3s ease;
 }
-
-
