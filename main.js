@@ -1,4 +1,4 @@
-let container = document.querySelector(".gridContainer");
+let container = document.querySelector("#gridContainer");
 let gridSize = document.querySelector("#gridSize");
 let gridRange = document.querySelector("#gridRange");
 let eraserMode = false;

@@ -2,10 +2,17 @@ body {
     user-select: none;
 }
 
-.gridContainer{
-    display: flex;
-    flex-wrap: wrap;
+.container{
     text-align: center;
+}
+
+#gridContainer{
+    display: flex;
+    flex-wrap: wrap;    
+}
+
+.gridRow{
+    display: flex;
 }
 
 .grid-square{

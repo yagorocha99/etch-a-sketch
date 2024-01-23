@@ -8,14 +8,22 @@
     </head>
     <body>
         <div class="container">
+
             <h1>Quadro</h1>
+
             <input id="gridRange" type="range" min="2" max="64" value="16" onchange="change();">
             <span id="gridSize">16 x 16</span>
+
             <button onclick="clearGrid()">Clear</button>
+
             <input type="color" id="inputColor">
+
             <button onclick="toggleEraser()">Eraser</button>
+
             <button onclick="toggleGrid()">Toggle Grid</button>
-            <div class="gridContainer" id="gridContainer"></div> 
+
+            <div id="gridContainer"></div> 
+        
         </div>
     </body>
     <script src="main.js"></script>
