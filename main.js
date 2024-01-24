@@ -5,6 +5,7 @@ let eraserMode = false;
 let gridMode = true;
 let buttons = 0;
 let isDrawing = false;
+let isTouching = false;
 
 function change() {
     let value = gridRange.value;
@@ -98,10 +99,33 @@ function handleMouseUp() {
     isDrawing = false;
 }
 
+document.addEventListener('touchstart', function(event) {
+    if (event.target.closest("#gridContainer")) {
+        isTouchingInsideContainer = true;
+        if (isDrawing) {
+            handleDrawing(event.targetTouches[0].target);
+        }
+    } else {
+        isTouchingInsideContainer = false;
+        event.preventDefault();
+    }
+});
+
 function handleTouchStart(event) {
-    isDrawing = true;
-    handleDrawing(event.targetTouches[0].target);
+    if (isDrawing && isTouchingInsideContainer) {
+        handleDrawing(event.targetTouches[0].target);
+    }
 }
+
+document.addEventListener('touchmove', function(event) {
+    if (!isTouchingInsideContainer) {
+        event.preventDefault();
+    }
+
+    if (isDrawing && isTouchingInsideContainer) {
+        handleTouchMove(event);
+    }
+});
 
 function handleTouchMove(event) {
     event.preventDefault();
@@ -122,7 +146,6 @@ function handleTouchEnd() {
 }
 
 function changeColor() {
-    let selectedColor = inputColor.value;
     container.addEventListener('mouseover', function(event) {
         if (event.buttons === 1) {
             let gridSquare = event.target;
