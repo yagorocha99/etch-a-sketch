@@ -7,6 +7,7 @@ let buttons = 0;
 let isMousePressed = false;
 let isTouching = false;
 let isDrawing = false;
+let isTouchingInsideContainer = false;
 
 function change() {
     let value = gridRange.value;
@@ -158,24 +159,43 @@ function handleMouseUp() {
     isDrawing = false;
 }
 
-function handleTouchStart(event) {
-    isDrawing = true;
-    handleDrawing(event.targetTouches[0].target);
-}
-
-function handleTouchMove(event) {
-    event.preventDefault();
-    if (isDrawing) {
-        let touchX = event.touches[0].clientX;
-        let touchY = event.touches[0].clientY;
-        let targetElement = document.elementFromPoint(touchX, touchY);
-
-        if (targetElement && targetElement.classList.contains("grid-square")) {
-            handleDrawing(targetElement);
+document.addEventListener('touchstart', function(event) {
+    if (event.target.closest("#gridContainer")) {
+        isTouchingInsideContainer = true;
+        if (isDrawing) {
+            handleDrawing(event.targetTouches[0].target);
         }
+    } else {
+        isTouchingInsideContainer = false;
+        event.preventDefault();
+    }
+});
+
+function handleTouchStart(event) {
+    if (isDrawing && isTouchingInsideContainer) {
+        handleDrawing(event.targetTouches[0].target);
     }
 }
 
+document.addEventListener('touchmove', function(event) {
+    if (!isTouchingInsideContainer) {
+        event.preventDefault();
+    }
+
+    if (isDrawing && isTouchingInsideContainer) {
+        handleTouchMove(event);
+    }
+});
+
+function handleTouchMove(event) {
+    let touchX = event.touches[0].clientX;
+    let touchY = event.touches[0].clientY;
+    let targetElement = document.elementFromPoint(touchX, touchY);
+
+    if (targetElement && targetElement.classList.contains("grid-square")) {
+        handleDrawing(targetElement);
+    }
+}
 
 function handleTouchEnd() {
     isDrawing = false;
