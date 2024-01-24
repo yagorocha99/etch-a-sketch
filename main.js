@@ -15,66 +15,6 @@ function change() {
     createGrid();
 }
 
-/*function createGrid() {
-    let size = parseInt(gridRange.value);
-    let containerWidth = Math.min(window.innerWidth, window.innerHeight) * 0.7;
-    let inputColor = document.querySelector("#inputColor");
-
-    container.innerHTML = '';
-
-    for (let i = 0; i < size * size; i++) {
-        let gridSquare = document.createElement("div");
-        gridSquare.classList.add("grid-square");
-
-        if (gridMode) {
-            gridSquare.style.border = "0.1vh solid #9c9c9c";
-        }
-
-        container.appendChild(gridSquare);
-
-        let squareSize = containerWidth / size;
-        gridSquare.style.width = `${squareSize}px`;
-        gridSquare.style.height = `${squareSize}px`;
-        
-        gridSquare.addEventListener('mouseover', function() {
-            if (buttons === 1) {
-                if (eraserMode) {
-                    gridSquare.style.backgroundColor = 'white';
-                } else {
-                    gridSquare.style.backgroundColor = inputColor.value;
-                }
-            }
-        });
-
-        gridSquare.addEventListener('mousedown', function() {
-            isMousePressed = true;
-            if (eraserMode) {
-                gridSquare.style.backgroundColor = 'white';
-            } else {
-                gridSquare.style.backgroundColor = inputColor.value;
-            }
-        });
-
-        gridSquare.addEventListener('mouseover', function() {
-            if (isMousePressed) {
-                if (eraserMode) {
-                    gridSquare.style.backgroundColor = 'white';
-                } else {
-                    gridSquare.style.backgroundColor = inputColor.value;
-                }
-            }
-        });
-
-        gridSquare.addEventListener('mouseup', function() {
-            isMousePressed = false;
-        });
-
-    }
-
-    container.style.maxWidth = `${containerWidth}px`;
-    container.style.maxHeight = `${containerWidth}px`;
-}*/
-
 function createGrid() {
     let size = parseInt(gridRange.value);
     let containerWidth = Math.min(window.innerWidth, window.innerHeight) * 0.7;
@@ -125,6 +65,17 @@ function clearGrid() {
 
 function toggleEraser() {
     eraserMode = !eraserMode;
+    updateEraserButtonStyle();
+}
+
+function updateEraserButtonStyle() {
+    let eraserButton = document.getElementById("eraserButton");
+
+    if (eraserMode) {
+        eraserButton.classList.add("eraser-active");
+    } else {
+        eraserButton.classList.remove("eraser-active");
+    }
 }
 
 function toggleGrid() {
@@ -212,6 +163,18 @@ function changeColor() {
         }
     });
 }
+
+document.addEventListener('touchstart', function(event) {
+    if (event.target.closest("#gridContainer")) {
+        isTouchingInsideContainer = true;
+        if (isDrawing) {
+            handleDrawing(event.targetTouches[0].target);
+        }
+    } else {
+        isTouchingInsideContainer = false;
+        event.preventDefault();
+    }
+});
 
 container.addEventListener('mousedown', function() {
     isMousePressed = true;
