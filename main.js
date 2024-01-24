@@ -7,12 +7,6 @@ let buttons = 0;
 let isMousePressed = false;
 let isTouching = false;
 let isDrawing = false;
-let isTouchingInsideContainer = false;
-
-let buttonsContainer = document.querySelector(".buttons-container");
-buttonsContainer.addEventListener("touchstart", function(event) {
-    event.preventDefault();
-});
 
 function change() {
     let value = gridRange.value;
@@ -23,32 +17,24 @@ function change() {
 function createGrid() {
     let size = parseInt(gridRange.value);
     let containerWidth = Math.min(window.innerWidth, window.innerHeight) * 0.7;
-
     container.innerHTML = '';
-
     for (let i = 0; i < size * size; i++) {
         let gridSquare = document.createElement("div");
         gridSquare.classList.add("grid-square");
-
         if (gridMode) {
             gridSquare.style.border = "0.1vh solid #9c9c9c";
         }
-
         container.appendChild(gridSquare);
-
         let squareSize = containerWidth / size;
         gridSquare.style.width = `${squareSize}px`;
         gridSquare.style.height = `${squareSize}px`;
-
         gridSquare.addEventListener('mousedown', handleMouseDown);
         gridSquare.addEventListener('mousemove', handleMouseMove);
         gridSquare.addEventListener('mouseup', handleMouseUp);
-
         gridSquare.addEventListener('touchstart', handleTouchStart);
         gridSquare.addEventListener('touchmove', handleTouchMove);
         gridSquare.addEventListener('touchend', handleTouchEnd);
     }
-
     container.style.maxWidth = `${containerWidth}px`;
     container.style.maxHeight = `${containerWidth}px`;
 }
@@ -68,8 +54,19 @@ function clearGrid() {
     });
 }
 
+function updateEraserButtonStyle() {
+    let eraserButton = document.getElementById("eraserButton");
+
+    if (eraserMode) {
+        eraserButton.classList.add("eraser-active");
+    } else {
+        eraserButton.classList.remove("eraser-active");
+    }
+}
+
 function toggleEraser() {
     eraserMode = !eraserMode;
+    updateEraserButtonStyle();
 }
 
 function toggleGrid() {
@@ -79,7 +76,6 @@ function toggleGrid() {
 
 function updateGridStyles() {
     let gridSquares = document.querySelectorAll(".grid-square");
-
     gridSquares.forEach(gridSquare => {
         if (gridMode) {
             gridSquare.style.border = "0.1vh solid #9c9c9c";
@@ -104,41 +100,22 @@ function handleMouseUp() {
     isDrawing = false;
 }
 
-document.addEventListener('touchstart', function(event) {
-    if (event.target.closest("#gridContainer")) {
-        isTouchingInsideContainer = true;
-        if (isDrawing) {
-            handleDrawing(event.targetTouches[0].target);
-        }
-    } else {
-        isTouchingInsideContainer = false;
-        event.preventDefault();
-    }
-});
-
 function handleTouchStart(event) {
-    if (isDrawing && isTouchingInsideContainer) {
-        handleDrawing(event.targetTouches[0].target);
-    }
+    isDrawing = true;
+    handleDrawing(event.targetTouches[0].target);
 }
 
-document.addEventListener('touchmove', function(event) {
-    if (!isTouchingInsideContainer) {
-        event.preventDefault();
-    }
-
-    if (isDrawing && isTouchingInsideContainer) {
-        handleTouchMove(event);
-    }
-});
-
 function handleTouchMove(event) {
-    let touchX = event.touches[0].clientX;
-    let touchY = event.touches[0].clientY;
-    let targetElement = document.elementFromPoint(touchX, touchY);
+    event.preventDefault();
+    if (isDrawing) {
+        handleDrawing(document.elementFromPoint(event.touches[0].clientX, event.touches[0].clientY));
+        let touchX = event.touches[0].clientX;
+        let touchY = event.touches[0].clientY;
+        let targetElement = document.elementFromPoint(touchX, touchY);
 
-    if (targetElement && targetElement.classList.contains("grid-square")) {
-        handleDrawing(targetElement);
+        if (targetElement && targetElement.classList.contains("grid-square")) {
+            handleDrawing(targetElement);
+        }
     }
 }
 
@@ -147,6 +124,7 @@ function handleTouchEnd() {
 }
 
 function changeColor() {
+    let selectedColor = inputColor.value;
     container.addEventListener('mouseover', function(event) {
         if (event.buttons === 1) {
             let gridSquare = event.target;
@@ -164,7 +142,6 @@ container.addEventListener('mousedown', function() {
 container.addEventListener('mouseup', function() {
     isMousePressed = false;
 });
-
 
 gridRange.addEventListener("input", change);
 createGrid();
