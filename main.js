@@ -110,18 +110,6 @@ function handleMouseUp() {
     isDrawing = false;
 }
 
-document.addEventListener('touchstart', function(event) {
-    if (event.target.closest("#gridContainer")) {
-        isTouchingInsideContainer = true;
-        if (isDrawing) {
-            handleDrawing(event.targetTouches[0].target);
-        }
-    } else {
-        isTouchingInsideContainer = false;
-        event.preventDefault();
-    }
-});
-
 function handleTouchStart(event) {
     if (isDrawing && isTouchingInsideContainer) {
         handleDrawing(event.targetTouches[0].target);
