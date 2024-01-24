@@ -6,6 +6,7 @@ let gridMode = true;
 let buttons = 0;
 let isMousePressed = false;
 let isTouching = false;
+let isDrawing = false;
 
 function change() {
     let value = gridRange.value;
@@ -165,9 +166,16 @@ function handleTouchStart(event) {
 function handleTouchMove(event) {
     event.preventDefault();
     if (isDrawing) {
-        handleDrawing(document.elementFromPoint(event.touches[0].clientX, event.touches[0].clientY));
+        let touchX = event.touches[0].clientX;
+        let touchY = event.touches[0].clientY;
+        let targetElement = document.elementFromPoint(touchX, touchY);
+
+        if (targetElement && targetElement.classList.contains("grid-square")) {
+            handleDrawing(targetElement);
+        }
     }
 }
+
 
 function handleTouchEnd() {
     isDrawing = false;
