@@ -6,6 +6,12 @@ let gridMode = true;
 let buttons = 0;
 let isDrawing = false;
 let isTouching = false;
+let isTouchingInsideContainer = false;
+
+let buttonsContainer = document.querySelector(".buttons-container");
+buttonsContainer.addEventListener("touchstart", function(event) {
+    event.preventDefault();
+});
 
 function change() {
     let value = gridRange.value;
