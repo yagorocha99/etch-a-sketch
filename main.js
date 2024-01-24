@@ -4,8 +4,6 @@ let gridRange = document.querySelector("#gridRange");
 let eraserMode = false;
 let gridMode = true;
 let buttons = 0;
-let isMousePressed = false;
-let isTouching = false;
 let isDrawing = false;
 
 function change() {
